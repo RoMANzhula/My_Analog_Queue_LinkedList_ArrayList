@@ -1,80 +1,74 @@
 public class AnalogQueue {
-    private int queueLength = 3; //создали переменную для установки размерности Очереди (для нашего случая)
-    private int[] queueElements = new int[queueLength]; //создаем массив типа int - имитация нашей Очереди
-    int firstElement = -1; //устанавливаем начальный индекс для переднего элемента Очереди = -1
-    int lastElement = -1; //устанавливаем начальный индекс для заднего элемента Очереди = -1
+    private int queueLength = 3; //створили змінну для встановлення розміру Черги (для нашого випадку)
+    private int[] queueElements = new int[queueLength]; //створюємо масив типу int - імітація нашої Черги
+    int firstElement = -1; //встановлюємо початковий індекс для переднього елемента Черги = -1
+    int lastElement = -1; //встановлюємо початковий індекс для заднього елемента Черги = -1
 
-    public boolean isQueueFull() { //метод проверки - полная очередь или нет
-        if (lastElement == queueLength - 1) { //если индекс последнего элемента = количеству мест в очереди, то
-            return true; //вернуть истина
-        } else { //иначе
-            return false; //вернуть ложь
+    public boolean isQueueFull() { //метод перевірки - повна черга чи ні
+        if (lastElement == queueLength - 1) { //якщо індекс останнього елемента = кількості місць у черзі, то
+            return true; //повернути істину
+        } else { //інакше
+            return false; //повернути хибу
         }
     }
 
-    public boolean isQueueEmpty() { //метод проверки - пустая очередь или нет
-        if (firstElement == -1 && lastElement == -1) { //если индексы передней и задней части очереди остались без
-            //изменений, то
-            return true; //вернуть истина
-        } else { //иначе
-            return false; //вернуть ложь
+    public boolean isQueueEmpty() { //метод перевірки - порожня черга чи ні
+        if (firstElement == -1 && lastElement == -1) { //якщо індекси переднього та заднього елементів не змінені, то
+            return true; //повернути істину
+        } else { //інакше
+            return false; //повернути хибу
         }
     }
 
-    public void inQueue(int queueElementValue) { //метод добавления по значению в конец Очереди
-        if (isQueueFull()) { //если очередь заполнена
-            System.out.println("Our Queue is full!"); //печатаем строковый литерал
-        } else if (firstElement == -1 && lastElement == -1) { //иначе если передний и задний элементы остались без
-            // изменений, то
-            lastElement = 0; //заднему элементу присваиваем индекс 0
-            firstElement = 0; //переднему элементу присваиваем индекс 0
-            queueElements[lastElement] = queueElementValue; //очереди [заднему элементу] присваиваем значение-параметр (как
-            // потенциальный аргумент добавляемого элемента в Очередь
-        } else { //иначе
-            lastElement++; //увеличиваем индекс заднего элемента на 1
-            queueElements[lastElement] = queueElementValue;  //очереди [заднему элементу] присваиваем значение-параметр (как
-            // потенциальный аргумент добавляемого элемента в Очередь
+    public void inQueue(int queueElementValue) { //метод додавання значення в кінець Черги
+        if (isQueueFull()) { //якщо черга заповнена
+            System.out.println("Наша черга заповнена!"); //друкуємо текстове повідомлення
+        } else if (firstElement == -1 && lastElement == -1) { //інакше, якщо передній та задній елементи не змінені, то
+            lastElement = 0; //задньому елементу присвоюємо індекс 0
+            firstElement = 0; //передньому елементу присвоюємо індекс 0
+            queueElements[lastElement] = queueElementValue; //черзі [задньому елементу] присвоюємо значення-параметр 
+        } else { //інакше
+            lastElement++; //збільшуємо індекс заднього елемента на 1
+            queueElements[lastElement] = queueElementValue;  //черзі [задньому елементу] присвоюємо значення-параметр 
         }
     }
 
-    public boolean add(int object) { //метод добавления элемента в Очередь
-        this.inQueue(object); //вызываем метод inQueue()
-        return true; //вернуть истина
+    public boolean add(int object) { //метод додавання елемента в Чергу
+        this.inQueue(object); //викликаємо метод inQueue()
+        return true; //повертаємо істину
     }
 
-    public void fromQueue() { //метод для удаления элемента из Очереди (всегда передний элемент)
-        if (isQueueEmpty()) { //если Очередь пустая, то
-            System.out.println("Our Queue is empty!"); //печатаем строковый литерал
-        } else if (firstElement == lastElement) { //иначе если индексы переднего и заднего элементов равны, то
-            firstElement = -1; //переднему элементу устанавливаем номинальное значение индекса
-            lastElement = -1; //заднему элементу устанавливаем номинальное значение индекса
-        } else { //иначе
-            firstElement++; //индекс переднего элемента увеличиваем на 1
+    public void fromQueue() { //метод для видалення елемента з Черги (завжди передній елемент)
+        if (isQueueEmpty()) { //якщо Черга порожня, то
+            System.out.println("Наша черга порожня!"); //друкуємо текстове повідомлення
+        } else if (firstElement == lastElement) { //інакше, якщо індекси переднього та заднього елементів рівні, то
+            firstElement = -1; //передньому елементу встановлюємо початкове значення індексу
+            lastElement = -1; //задньому елементу встановлюємо початкове значення індексу
+        } else { //інакше
+            firstElement++; //збільшуємо індекс переднього елемента на 1
         }
     }
 
-    public boolean remove() { //метод удаления элемента из очереди (всегда удаляется передний элемент)
-        this.fromQueue(); //вызываем метод fromQueue()
-        return true; //вернуть истина
+    public boolean remove() { //метод видалення елемента з Черги (завжди видаляється передній елемент)
+        this.fromQueue(); //викликаємо метод fromQueue()
+        return true; //повертаємо істину
     }
 
-    public void print() { //метод вывода в консоль перечня элементов нашей Очереди
-        if (isQueueEmpty()) { //если Очередь пустая, то
-            System.out.println("Our Queue is empty!"); //печатаем строковый литерал
-        } else { //иначе
-            for (int i = firstElement; i <= lastElement ; i++) { //циклом проходимся от переднего элемента очереди до
-                // заднего(включительно)
-                System.out.println(queueElements[i]); //выводим на печать каждый элемент Очереди под соответствующим
-                // индексом
+    public void print() { //метод виведення у консоль списку елементів нашої Черги
+        if (isQueueEmpty()) { //якщо Черга порожня, то
+            System.out.println("Наша черга порожня!"); //друкуємо текстове повідомлення
+        } else { //інакше
+            for (int i = firstElement; i <= lastElement ; i++) { //циклом проходимо від переднього елемента до заднього
+                System.out.println(queueElements[i]); //виводимо на екран кожен елемент Черги за відповідним індексом
             }
         }
     }
 
-    public void printFirstElementInQueue() { //метод вывода в консоль переднего элемента Очереди
-        System.out.println("First element in Queue is: " + queueElements[firstElement]);
+    public void printFirstElementInQueue() { //метод виведення у консоль переднього елемента Черги
+        System.out.println("Перший елемент у Черзі: " + queueElements[firstElement]);
     }
 
-    public void printLastElementInQueue() { //метод вывода в консоль заднего элемента Очереди
-        System.out.println("Last element in Queue is: " + queueElements[lastElement]);
+    public void printLastElementInQueue() { //метод виведення у консоль заднього елемента Черги
+        System.out.println("Останній елемент у Черзі: " + queueElements[lastElement]);
     }
 }
