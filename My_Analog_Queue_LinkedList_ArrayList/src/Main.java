@@ -5,8 +5,8 @@ public class Main {
         analogQueue.add(1);
         analogQueue.add(2);
         analogQueue.add(3);
-        analogQueue.add(4); //данная операция выводит строку, что наша очередь заполнена, т.к. мы установили лимит на размер
-        //очереди равный 3 элементам
+        analogQueue.add(4); //Ця операція виводить рядок, що черга заповнена, т.к. ми встановили ліміт на розмір
+        // черги рівний 3 елементам
         analogQueue.print();
         analogQueue.printFirstElementInQueue();
         analogQueue.printLastElementInQueue();
